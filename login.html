@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        h1 {
+            width: auto;
+            height: 0%;
+            text-align: center;
+            margin: 50px auto;
+            padding: 30px 5px 15px 5px;
+            font-size: 44px;
+            font-weight: bold;
+        }
+        a {
+            
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+        }
+        a:hover {
+            color: black;
+        }
+        form {
+            width: 400px;
+            margin: auto;
+            padding: 10px;
+            line-height:2em
+        }
+        #id, #pw {
+            width: 350px;
+            margin: 10px 15px;
+        }
+        .bottom_btn {
+            margin: 30px auto;
+            text-align: center;
+        }
+        footer {
+            background-color: lightgrey;
+            padding: 30px 50px 65px;
+            margin-top: 100px;
+            line-height: 2rem;
+            margin-bottom: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1><a href="main.html">Grey Sky</a></h1>
+    <div>
+        <form action="#" method="post">
+            <input type="text" name="id" placeholder="아이디" id="id"><br>
+            <input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
+            <div class="bottom_btn">
+                <input type="button" class="btn btn-outline-dark" value="회원가입" onclick="join()"> &nbsp;
+                <input type="submit" class="btn btn-dark" value="로그인" onclick="login()">
+            </div>
+        </form>
+        
+    </div>
+
+    <script>
+        function login() {
+            const id = document.querySelector("#id");
+            const pw = document.querySelector("#pw");
+            if (id.value == '' && pw.value == '') {
+                alert('아이디와 비밀번호를 입력해주세요.');
+            }
+            else if(id.value == '') {
+                alert('아이디를 입력해주세요.');
+                
+            }
+            else if(pw.value == '') {
+                alert('비밀번호를 입력해주세요.');
+            }
+            else if(id.value == 'admin' && pw.value == 'aaa111!!!') {
+                alert('관리자 로그인 되었습니다.');
+            }
+        }
+        function join() {
+            location.href = "join.html";
+        }
+    </script>
+    <footer>
+        <div class="top">
+            <div class="container">
+                <a href="#" >사업 문의</a> /
+                <a href="#">개인정보처리방침</a> /
+                <a href="#">사업자 정보</a>
+            </div>
+        </div>
+        <div class="container">
+            <strong>
+                대표자: 이예진
+            </strong>
+            <br>사진 출처: <a href="https://unsplash.com/"><u>Unsplash</u></a>
+            <div class="copyright">
+                DESIGNED BY YEAJIN LEE
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

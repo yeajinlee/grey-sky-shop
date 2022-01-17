@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <link rel="stylesheet" href="detail.css">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style>
+        .reverse {
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script>
+         $(document).ready(function() {
+           $('.leftMenu > li').hover(function() {
+               $(this).addClass('reverse');
+           }, function() {
+               $(this).removeClass('reverse');
+            });
+        });
+        $(document).ready(function() {
+           $('.btn').hover(function() {
+               $(this).addClass('reverse');
+           }, function() {
+               $(this).removeClass('reverse');
+            });
+        });
+        function go_cart() {
+            alert('선택하신 제품이 장바구니에 담겼습니다.');
+        }
+        function go_order() {
+            alert('사이트 점검으로 현재 주문이 불가합니다.');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><a href="main.html">Grey Sky</a></div>
+            <ul class="sideMenu">
+                <li><a href="join.html">JOIN</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul class="leftMenu">
+                <li><a href="main.html">All</a></li>
+                <li><a href="#">Poster</a></li>
+                <li><a href="#">Postcard</a></li>
+                <li><a href="#">Sticker</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="#">Q&A</a></li>
+            </ul>
+        </div>
+    </nav>
+    </body>
+    <table>
+        <tbody>
+            <tr>
+                <td><img src="./image/jake-hills-z0gDv24X3uQ-unsplash.jpg"></td>
+                <td class="info">
+                    <ul>
+                        <li class="p_name"><b>product name</b></li>
+                        <li>가격: 0000원</li>
+                        <li>색상: black, white</li>
+                        <li>크기: 30cm X 40cm</li>
+                        <li><br><br></li>
+                        <li>
+                            수량 &nbsp;<input type="number" min="1" max="10" id="cnt">
+                        </li>
+                        <li>
+                            색상 &nbsp;
+                            <select name="p_color" id="p_color">
+                                <option value="black">black</option>
+                                <option value="white">white</option>
+                            </select>
+                        </li>
+                        <li><br></li>
+                        <li>
+                            <input type="button" class=btn id="cart" value="장바구니" onclick="go_cart()">
+                            <input type="button" class=btn id="order" value="바로주문" onclick="go_order()">
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="detail">
+        <h2>Detail</h2>
+        <p>
+            제품의 상세정보 부분
+        </p>
+    </div>
+    <footer>
+        <div class="top">
+            <div class="container">
+                <a href="#" >사업 문의</a> /
+                <a href="#">개인정보처리방침</a> /
+                <a href="#">사업자 정보</a>
+            </div>
+        </div>
+        <div class="container">
+            <strong>
+                대표자: 이예진
+            </strong>
+            <br>사진 출처: <a href="https://unsplash.com/"><u>Unsplash</u></a>
+            <div class="copyright">
+                DESIGNED BY YEAJIN LEE
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

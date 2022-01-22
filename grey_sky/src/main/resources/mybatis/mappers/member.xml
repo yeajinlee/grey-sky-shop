@@ -8,13 +8,9 @@
 		<result property="id" column="id" />
 		<result property="pwd" column="pwd" />
 		<result property="name" column="name" />
-		<result property="bDay" column="bDay" />
-		<result property="gender" column="gender" />
 		<result property="phone" column="phone" />
 		<result property="email" column="email" />
-		<result property="zipcode" column="zipcode" />
-		<result property="addr1" column="addr1" />
-		<result property="addr2" column="addr2" />
+		<result property="eDomain" column="eDomain" />
 		<result property="joinDate" column="joinDate" />
 	</resultMap>
 	
@@ -24,16 +20,16 @@
 		]]>
 	</select>
 	
-	<select id="selectOverlapedId" parameterType="String" resultType="String">
+	<select id="selectOverlappedId" parameterType="String" resultType="String">
 		<![CDATA[
-			selet decode(count(*), 1, 'true', 0, 'false') from g_member where id=#{id}
+			select decode(count(*), 1, 'true', 0, 'false') from g_member where id=#{id}
 		]]>
 	</select>
 	
 	<insert id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-			insert into g_member(id, pwd, name, bDay, gender, phone, email, zipcode, addr1, addr2, joinDate)
-			values (#{id}, #{pwd}, #{name}, #{bDay}, #{gender}, #{phone}, #{email}, #{zipcode}, #{addr1}, #{addr2}, #{joinDate})
+			insert into g_member(id, pwd, name, phone, email, eDomain, zipcode, addr1, addr2)
+			values (#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{eDomain}, #{zipcode, jdbcType=VARCHAR}, #{addr1, jdbcType=VARCHAR}, #{addr2, jdbcType=VARCHAR})
 		]]>
 	</insert>
 </mapper>

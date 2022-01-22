@@ -3,6 +3,10 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
 	<typeAliases>
 		<typeAlias type="com.onlineshop.greysky.review.vo.ReviewVO"  alias="reviewVO" />
 		<typeAlias type="com.onlineshop.greysky.member.vo.MemberVO"  alias="memberVO" />

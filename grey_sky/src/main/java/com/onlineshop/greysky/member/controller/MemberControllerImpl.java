@@ -68,10 +68,11 @@ public class MemberControllerImpl implements MemberController{
 	public ResponseEntity join(MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		String message = null;
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		try {
 			memberService.join(memberVO);
 			message = "<script>";
@@ -80,7 +81,7 @@ public class MemberControllerImpl implements MemberController{
 			message += "</script>";
 		} catch(Exception e) {
 			message = "<script>";
-			message += "alert('오류가 발생했습니다. 다시 시도해 주세요');";
+			message += "alert('전화번호 또는 이메일이 이미 존재합니다. 다시 시도해 주세요.');";
 			message += "location.href='"+request.getContextPath()+"/member/joinForm.do';";
 			message += "</script>";
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -111,74 +111,166 @@ footer {
 	line-height: 2rem;
 }
 </style>
+<script>
+	var pwd_req = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=])(?=.*[0-9]).{8,24}$/;
+	var id_clicked = 0;
+	
+	function change_domain() {
+		var s_index = e_d_select.options.selectedIndex;
+		var s_val = e_d_select.options[s_index];
+		eDomain.value = s_val.value;
+
+	}
+	function zip_search() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				var addr = '';
+				var extraAddr = '';
+				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					addr = data.roadAddress;
+				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+					addr = data.jibunAddress;
+				}
+				// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+				if (data.userSelectedType === 'R') {
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraAddr += (extraAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraAddr !== '') {
+						extraAddr = ' (' + extraAddr + ')';
+					}
+					// 조합된 참고항목을 해당 필드에 넣는다.
+					document.getElementById("addr1").value = extraAddr;
+
+				} else {
+					document.getElementById("addr1").value = '';
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('zipcode').value = data.zonecode;
+				document.getElementById("addr1").value = addr;
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById("addr2").focus();
+			}
+		}).open();
+	}
+	function history_back() {
+		history.back();
+	}
+	function create_account() {
+		if (id.value == '') {
+			alert('아이디를 입력하세요.');
+			id.focus();
+		} else if (pwd.value == '') {
+			alert('비밀번호를 입력하세요.');
+			pwd.focus();
+		} else if (!pwd_req.test(pwd.value)) {
+			alert('비밀번호는 영문 대소문자/숫자/특수문자 조합(8~24자)입니다.');
+			pwd.focus;
+		} else if (pwd_c.value == '') {
+			alert('비밀번호를 한 번 더 입력하세요.');
+			pwd_c.focus();
+		} else if (pwd.value != pwd_c.value) {
+			alert('비밀번호 확인이 비밀번호와 다릅니다.');
+			pwd_c.focus;
+		} else if (name.value == '') {
+			alert('이름을 입력하세요.');
+			name.focus();
+		} else if (phone.value == '') {
+			alert('전화번호를 입력하세요.');
+			phone.focus();
+		}
+		else if ($("input:checkbox[id=agree]").is(":checked") == false) {
+			alert("회원 가입을 위해 약관동의가 필요합니다.")
+		} else if (id_clicked == 0) {
+			alert("아이디 중복확인이 필요합니다.")
+		} else {
+			document.join_member.submit();
+		}
+	}
+
+	function id_check() {
+		var id = $("#id").val();
+		if (id == "") {
+			alert("아이디를 입력하세요.");
+			return;
+		}
+		$.ajax({
+			type : "POST",
+			async : true,
+			url : "${contextPath}/member/overlapped.do",
+			dataType : "text",
+			data : {id: id},
+			success : function(data, textStatus) {
+				if (data == 'false') {
+					alert("사용할 수 있는 아이디입니다.");
+					
+					id_clicked++;
+				} else {
+					alert("이미 존재하는 아이디입니다.");
+				}
+			},
+			error : function(data, textStatus) {
+				alert("오류가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				alert("아이디 중복확인 완료");
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<h1>
 		<a href="${contextPath}/main.do">Grey Sky</a>
 	</h1>
 	<div>
-		<form name="join_member" action="#" method="post">
+		<form name="join_member"
+			action="${pageContext.request.contextPath}/member/join.do"
+			method="post">
 			* 표시는 필수 입력 항목입니다.
 			<table>
 				<tbody>
 					<tr>
 						<th>아이디 *</th>
-						<td><input type="text" name="id" id="id"> <input
+						<td><input type="text" name="id" id="id"> 
+						<input
 							type="button" id="id_check_btn" onclick="id_check()" value="중복확인"></input>
 
 						</td>
 					</tr>
 					<tr>
 						<th>비밀번호 *</th>
-						<td><input type="password" name="password" id="password">
+						<td><input type="password" name="pwd" id="pwd">
 							영문자/숫자/특수문자의 조합 (8~24자)</td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인 *</th>
-						<td><input type="password" name="pwd_comfirm" id="pwd_confirm"></td>
+						<td><input type="password" name="pwd_c"
+							id="pwd_c"></td>
 					</tr>
 					<tr>
 						<th>이름 *</th>
-						<td><input type="text" name="name" id="username"></td>
-					</tr>
-					<tr>
-						<th>생년월일</th>
-						<td><input type="text" name="b_year" placeholder="년(4자리 숫자)"
-							max="4" id="b_year"> <select name="b_month" id="b_month">
-								<option value="월">월</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-						</select> <input type="text" name="b_date" max="2" id="b_date"
-							placeholder="일"></td>
-					</tr>
-					<tr>
-						<th>성별</th>
-						<td><select name="gender" id="gender">
-								<option value="">선택</option>
-								<option value="female" id="female">여성</option>
-								<option value="male" id="male">남성</option>
-						</select></td>
+						<td><input type="text" name="name" id="name"></td>
 					</tr>
 					<tr>
 						<th>전화번호 *</th>
-						<td><input type="text" name="mobile" id="mobile"
+						<td><input type="text" name="phone" id="phone"
 							placeholder="-없이 숫자만 입력"></td>
 					</tr>
 					<tr>
-						<th>이메일</th>
-						<td><input type="text" name="email_addr" id="e_addr">
-							@ <input type="text" name="email_domain" id="e_domain"> <select
-							name="e_domain_select" id="e_d_select" onchange="change_domain()">
+						<th>이메일 *</th>
+						<td><input type="text" name="email" id="email"> @ <input
+							type="text" name="eDomain" id="eDomain"> <select
+							name="eDomain_select" id="e_d_select" onchange="change_domain()">
 								<option value="">직접 입력</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="naver.com">naver.com</option>
@@ -187,11 +279,10 @@ footer {
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td><input type="text" name="zip_code" id="zip_code">
+						<td><input type="text" name="zipcode" id="zipcode">
 							<button type="button" id="zip_search_btn" onclick="zip_search()">우편번호</button>
-							<br> <input type="text" name="address" id="address">기본주소<br>
-							<input type="text" name="detail_addr" id="detail_addr">상세주소
-						</td>
+							<br> <input type="text" name="addr1" id="addr1">기본주소<br>
+							<input type="text" name="addr2" id="addr2">상세주소</td>
 					</tr>
 					<tr>
 						<th>약관 동의 *</th>
@@ -202,133 +293,13 @@ footer {
 			</table>
 
 			<div class="bottom_btn">
-				<button type="button" class="btn btn-outline-dark"
-					onclick="history_back()">뒤로가기</button>
-				<button type="submit" class="btn btn-dark"
-					onclick="create_account()">가입하기</button>
+				<input type="button" class="btn btn-outline-dark"
+					onclick="history_back()" value="뒤로가기"> <input type="button"
+					class="btn btn-dark" onclick="create_account()" value="가입하기">
 			</div>
 		</form>
 	</div>
-	<script>
-        var id = document.getElementById('id'); //필수
-        var pwd = document.getElementById('password'); //필수
-        var pwd_c = document.getElementById('pwd_confirm'); //필수
-        var username = document.getElementById('username'); //필수
-        var b_year = document.getElementById('b_year');
-        var b_month = document.getElementById('b_month'); 
-        var b_date = document.getElementById('b_date');
-        var female = document.getElementById('female');
-        var male = document.getElementById('male');
-        var mobile = document.getElementById('mobile'); //필수
-        var e_addr = document.getElementById('e_addr');
-        var e_domain = document.getElementById('e_domain');
-        var e_d_select = document.getElementById('e_d_select');
-        var zip_code = document.getElementById('zip_code');
-        var addr = document.getElementById('address');
-        var d_addr = document.getElementById('detail_addr');
-        var agree = document.getElementById('agree').checked; //필수
-        var pwd_req = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=])(?=.*[0-9]).{8,24}$/;
-        var id_clicked = 0;
 
-        function id_check() {
-            id_clicked++;
-            if (id.value == 'admin') {
-                alert('이미 존재하는 아이디입니다.');
-                id.focus();
-            } else {
-                alert('사용가능한 아이디입니다.');
-            }
-        }
-        function change_domain() {
-            var s_index = e_d_select.options.selectedIndex;
-            var s_val = e_d_select.options[s_index];
-            e_domain.value = s_val.value;
-            
-        }
-        function zip_search() {
-            new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = '';
-                var extraAddr = '';
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("address").value = extraAddr;
-                
-                } else {
-                    document.getElementById("address").value = '';
-                }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zip_code').value = data.zonecode;
-                document.getElementById("address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detail_addr").focus();
-            }
-        }).open();
-    }
-        function history_back() {
-            history.back();
-        }
-        function create_account() {
-            if(id.value == '') {
-                alert('아이디를 입력하세요.');
-                id.focus();
-            }
-            else if(pwd.value == '') {
-                alert('비밀번호를 입력하세요.');
-                pwd.focus();
-            }
-            else if(!pwd_req.test(pwd.value)) {
-                alert('비밀번호는 영문 대소문자/숫자/특수문자 조합(8~24자)입니다.');
-                pwd.focus;
-            }
-            else if(pwd_c.value == '') {
-                alert('비밀번호를 한 번 더 입력하세요.');
-                pwd_c.focus();
-            }
-            else if(pwd.value != pwd_c.value) {
-                alert('비밀번호 확인이 비밀번호와 다릅니다.');
-                pwd_c.focus;
-            }
-            else if(username.value == '') {
-                alert('이름을 입력하세요.');
-                username.focus();
-            }
-            else if(mobile.value == '') {
-                alert('전화번호를 입력하세요.');
-                mobile.focus();
-            }
-            
-            else if ($("input:checkbox[id=agree]").is(":checked") == false) {
-                alert("회원 가입을 위해 약관동의가 필요합니다.")
-            }
-            else if (id_clicked == 0) {
-                alert("아이디 중복확인이 필요합니다.")
-            } else {
-                alert('환영합니다!');
-            }
-        }
-        
-    </script>
-	
 </body>
 </html>

@@ -16,5 +16,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.login(memberVO);
 	}
 	
+	@Override
+	public void join(MemberVO memberVO) throws Exception{
+		memberDAO.insertNewMember(memberVO);
+	}
+	
+	@Override
+	public String overlapped(String id) throws Exception {
+		return memberDAO.selectOverlappedId(id);
+	}
 	
 }

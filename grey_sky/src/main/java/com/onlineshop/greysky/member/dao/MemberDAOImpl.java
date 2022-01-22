@@ -20,5 +20,17 @@ public class MemberDAOImpl implements MemberDAO{
 		return vo;
 	}
 	
+	@Override
+	public void insertNewMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.insert("mappers.member.insertNewMember", memberVO);
+		
+	}
+	
+	@Override
+	public String selectOverlappedId(String id) throws DataAccessException {
+		String result = sqlSession.selectOne("mappers.member.selectOverlappedId", id);
+		return result;
+	}
+	
 	
 }

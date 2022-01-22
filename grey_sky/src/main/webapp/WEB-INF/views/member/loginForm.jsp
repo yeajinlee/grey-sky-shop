@@ -82,13 +82,12 @@ footer {
 	</h1>
 	<div>
 		<form action="${pageContext.request.contextPath}/member/login.do"
-			method="post">
+			method="post" name="login">
 			<input type="text" name="id" placeholder="아이디" id="id"><br>
 			<input type="password" name="pwd" placeholder="비밀번호" id="pwd"><br>
 			<div class="bottom_btn">
 				<input type="button" class="btn btn-outline-dark" value="회원가입" onclick="join()"> &nbsp;
 				<input type="submit" class="btn btn-dark" value="로그인">
-				
 			</div>
 		</form>
 	</div>
@@ -96,6 +95,8 @@ footer {
 		function join() {
 			location.href = "${pageContext.request.contextPath}/member/joinForm.do";
 		}
+		
+		
 		
 	</script>
 </body>

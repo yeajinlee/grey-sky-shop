@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.review">
+	<resultMap type="reviewVO" id="reviewResult">
+		<result property="reviewNO" column="reviewNO" />
+		<result property="prodCode" column="prodCode" />
+		<result property="id" column="id" />
+		<result property="postDate" column="postDate" />
+		<result property="star" column="star" />
+		<result property="content" column="rcontent" />
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
+	
+	<select id="selectAllReviewList" resultMap="reviewResult">
+		<![CDATA[
+			select * from g_review
+		]]>
+	</select>
+</mapper>

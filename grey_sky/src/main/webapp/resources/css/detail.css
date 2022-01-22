@@ -1,0 +1,124 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+    list-style: none;
+}
+.container {
+    width: 1080px;
+    height: 100%;
+    padding: 0 20px;
+}
+
+a {
+    /* width: 100%;
+    height: 100%; */
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+} 
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    color: black;
+}
+header .logo {
+    float: left;
+    font-size: 50px;
+    font-weight: 700;
+    padding-top: 50px;
+}
+header .sideMenu {
+    float: right;
+    color: black;
+    padding-right: 30px;
+}
+header .sideMenu > li {
+    width: 60px;
+    font-size: small;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    float: left;
+
+}
+
+
+nav {
+    width: 1080px;
+    height: 60px;
+    border-bottom: 1px solid #cbcbcb;
+}
+nav .leftMenu {
+    float: right;
+    height: 100%;
+    font-size: 19px;
+    font-weight: bold;
+}
+nav .leftMenu > li {
+    width: auto;
+    padding: 0 20px;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    float: left;
+}
+/* table {
+    table-layout: fixed;
+    text-align: center;
+} */
+/* img {
+    width: 500px;
+    height: 400px;
+    margin: 15px 70px 15px 30px;
+} */
+.p_name {
+    font-size: 30px;
+    width: 300px;
+    padding: 20px 0;
+}
+
+#cnt {
+    width: 150px;
+}
+#p_color {
+    width: 150px;
+}
+.btn {
+    width: 100px;
+    height: 30px;
+    border: 1.5px solid black;
+    color: black;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    font-weight: bold;
+    cursor: pointer;
+}
+h2 {
+    width: 1000px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin: 40px auto;
+    border-bottom: 1px solid #cbcbcb;
+}
+p {
+    width: 1000px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin: 40px auto;
+}
+
+footer {
+    background-color: lightgrey;
+    padding: 30px 50px 50px;
+    margin-top: 100px;
+    line-height: 2rem;
+}

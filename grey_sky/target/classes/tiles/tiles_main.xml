@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout"
+		template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="Grey Sky"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/main.jsp"></put-attribute>
+	</definition>
+
+	<definition name="/review/listReview" extends="baseLayout">
+		<put-attribute name="title" value="Mountain Poster"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/detail.jsp"></put-attribute>
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<definition name="/member/loginForm" extends="baseLayout">
+		<put-attribute name="title" value="Login"></put-attribute>
+		<put-attribute name="header"
+			value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/loginForm.jsp"></put-attribute>
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<definition name="/member/joinForm" extends="baseLayout">
+		<put-attribute name="title" value="Join"></put-attribute>
+		<put-attribute name="header"
+			value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/joinForm.jsp"></put-attribute>
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+</tiles-definitions>

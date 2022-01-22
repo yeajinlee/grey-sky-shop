@@ -29,10 +29,10 @@
             });
         });
         function go_cart() {
-            alert('선택하신 제품이 장바구니에 담겼습니다.');
+            alert('해댱 상품은 현재 품절이므로 장바구니에 담을 수 없습니다.');
         }
         function go_order() {
-            alert('사이트 점검으로 현재 주문이 불가합니다.');
+            alert('해당 상품은 현재 품절이므로 주문하실 수 없습니다.');
         }
     </script>
 </head>
@@ -54,7 +54,7 @@
                 <li><a href="#">Postcard</a></li>
                 <li><a href="#">Sticker</a></li>
                 <li><a href="#">Cart</a></li>
-                <li><a href="#">Q&A</a></li>
+                <li><a href="#">Notice</a></li>
             </ul>
         </div>
     </nav>
@@ -65,19 +65,19 @@
                 <td><img src="./image/jake-hills-z0gDv24X3uQ-unsplash.jpg"></td>
                 <td class="info">
                     <ul>
-                        <li class="p_name"><b>product name</b></li>
-                        <li>가격: 0000원</li>
-                        <li>색상: black, white</li>
-                        <li>크기: 30cm X 40cm</li>
+                        <li class="p_name"><b>Mountain Postcard</b></li>
+                        <li>가격: 5000원</li>
+                        <li>뒷면 색상: black, white</li>
+                        <li>크기: 15cm X 10cm</li>
                         <li><br><br></li>
                         <li>
-                            수량 &nbsp;<input type="number" min="1" max="10" id="cnt">
+                            수량 &nbsp;<input type="number" min="1" max="10" id="cnt" disabled>
                         </li>
                         <li>
                             색상 &nbsp;
                             <select name="p_color" id="p_color">
-                                <option value="black">black</option>
-                                <option value="white">white</option>
+                                <option value="black">black - 품절</option>
+                                <option value="white">white - 품절</option>
                             </select>
                         </li>
                         <li><br></li>
@@ -93,8 +93,16 @@
     <div class="detail">
         <h2>Detail</h2>
         <p>
-            제품의 상세정보 부분
+            유명 사진작가의 산 사진 3종이 프린팅된 엽서세트 (3장이 한세트입니다.)
         </p>
+    </div>
+    <div class="qna">
+        <h2>Review</h2>
+        <p>
+            리뷰영역<br>
+            <input type="button" value="후기 등록" class="btn" onclick="location.href='rForm.html'">
+        </p>
+        
     </div>
     <footer>
         <div class="top">

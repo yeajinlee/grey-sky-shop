@@ -1,11 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grey Sky</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Question Form</title>
+    <link rel="stylesheet" href="resources/css/reviewForm.css">
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <style>
         .reverse {
@@ -41,44 +44,13 @@
                 <li><a href="#">Postcard</a></li>
                 <li><a href="#">Sticker</a></li>
                 <li><a href="#">Cart</a></li>
-                <li><a href="#">Q&A</a></li>
+                <li><a href="#">Notice</a></li>
             </ul>
         </div>
     </nav>
-    <table>
-        <tbody>
-            <tr>
-                <td><a href="detail.html"><img src="./image/benjamin-child-6msS8vT5pzw-unsplash.jpg" alt=""></a></td>
-                <td><a href="detail.html"><img src="./image/martin-adams-MWyATCbnGWM-unsplash.jpg" alt=""></a></td>
-                <td><a href="detail.html"><img src="./image/nacho-rochon-CG7YwmRDGvI-unsplash.jpg" alt=""></a></td>
-                <td><a href="detail.html"><img src="./image/sean-oulashin-KMn4VEeEPR8-unsplash.jpg" alt=""></a></td>
-            </tr>
-            <tr>
-                <td><b>poster1</b> <br> 5000원</td>
-                <td><b>poster2</b> <br> 10000원</td>
-                <td><b>sticker1</b> <br> 3000원</td>
-                <td><b>postcard1</b> <br> 2000원</td>
-            </tr>
-            <tr>
-                <td><br></td>
-                <td><br></td>
-                <td><br></td>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td><a href="detail.html"><img src="./image/tyler-lastovich-_vtwQ1P2L1U-unsplash.jpg" alt="" ></a></td>
-                <td><a href="detail.html"><img src="./image/samuel-scrimshaw-fkS-me35j7I-unsplash.jpg" alt=""></a></td>
-                <td><a href="detail.html"><img src="./image/mche-lee-je3zlxmudxw-unsplash.jpg" alt=""></a></td>
-                <td><a href="detail.html"><img src="./image/jake-hills-z0gDv24X3uQ-unsplash.jpg" alt=""></a></td>
-            </tr>
-            <tr>
-                <td><b>postcard2</b> <br> 1500원</td>
-                <td><b>poster3</b><br> 7000원</td>
-                <td><b>sticker2</b> <br> 1000원</td>
-                <td><b>sticker3</b><br> 3000원</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="rForm">
+        
+    </div>
     <footer>
         <div class="top">
             <div class="container">
